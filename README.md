@@ -1,6 +1,6 @@
 ﻿# RxJava操作符
 
- rxjava operators
+rxjava operators
 
 ---
 
@@ -46,15 +46,21 @@
     
 ```
 >打印结果
+
 >scan:: onNext:1
+
 >scan:: one:1 two:2
 >scan:: onNext:2
+
 >scan:: one:2 two:3
 >scan:: onNext:6
+
 >scan:: one:6 two:4
 >scan:: onNext:24
+
 >scan:: one:24 two:5
 >scan:: onNext:120
+
 >scan:: onCompleted
 
 >打印结果分析:
@@ -746,4 +752,3 @@ retry:: onCompleted
 
 
 ##[源码下载](https://github.com/yingshirun/RxJava-Operators)
-

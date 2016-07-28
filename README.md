@@ -1,6 +1,6 @@
 ﻿# RxJava操作符
 
-标签（空格分隔）： rxjava operators
+ rxjava operators
 
 ---
 
@@ -84,7 +84,7 @@ scan:: onNext:120
 >scan:: onCompleted  
  完成
 
-- 比如 求1-100的和 (这里配合[Lambda表达式][1] 可以简洁很多)
+- 比如 求1-100的和 (这里配合[Lambda表达式](http://blog.csdn.net/ziqiang1/article/details/50824830) 可以简洁很多)
 
 ```java
         Observable.range(1,100)
@@ -745,8 +745,5 @@ retry:: onCompleted
 ----------
 
 
-##[源码下载][2]
+##[源码下载](https://github.com/yingshirun/RxJava-Operators)
 
-
-  [1]: http://blog.csdn.net/ziqiang1/article/details/50824830
-  [2]: https://github.com/yingshirun/RxJava-Operators

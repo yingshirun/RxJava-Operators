@@ -1,4 +1,4 @@
-﻿# RxJava操作符
+# RxJava操作符
 
 rxjava operators
 
@@ -47,23 +47,18 @@ rxjava operators
 ```
 >打印结果
 
->scan:: onNext:1
-
->scan:: one:1 two:2
->scan:: onNext:2
-
->scan:: one:2 two:3
->scan:: onNext:6
-
->scan:: one:6 two:4
->scan:: onNext:24
-
->scan:: one:24 two:5
->scan:: onNext:120
-
+>scan:: onNext:1  
+>scan:: one:1 two:2  
+>scan:: onNext:2  
+>scan:: one:2 two:3  
+>scan:: onNext:6  
+>scan:: one:6 two:4  
+>scan:: onNext:24  
+>scan:: one:24 two:5  
+>scan:: onNext:120  
 >scan:: onCompleted
 
->打印结果分析:
+>打印结果分析:  
 scan:: onNext:1      
 >>第一次没有走scan的call 
 
@@ -72,7 +67,7 @@ scan:: onNext:1
 >>第二次第一个参数是上一次的运行结果，第二个参数是本次的数据源 所以 one:1 two:2
 >>onNext = 1*2 = 2
 
->scan:: one:2 two:3 
+>scan:: one:2 two:3   
 scan:: onNext:6     
 >>第三次  第一个参数是上一次运行的结果 2， 第二个参数是本次的发射的数据 3 所以 one:2 tow 3
 >>onNext = 2*3 = 6
@@ -82,7 +77,7 @@ scan:: onNext:24
 >>第四次 第一个参数是上一次运行的结果 6 第二个参数是本次发射的数据 4 所以 one:6 two 4
 >>onNext = 6*4 = 24
 
->scan:: one:24 two:5 
+>scan:: one:24 two:5  
 scan:: onNext:120   
 >>第五次 第一个参数是上一次运行的结果 24 第二个参数是本次发射的数据 5 所以 one:24 two 5
 >>onNext = 24*5 = 120
@@ -98,13 +93,13 @@ scan:: onNext:120
                 .subscribe(sum->Log.d("scan:","sum(1-100):"+sum));
 ```
 >打印结果:
-scan:: sum(1-100):1
-scan:: sum(1-100):3
-...
-...
-...
-scan:: sum(1-100):4950
-scan:: sum(1-100):5050
+scan:: sum(1-100):1  
+scan:: sum(1-100):3  
+...  
+...   
+...  
+scan:: sum(1-100):4950  
+scan:: sum(1-100):5050  
 
 
 
@@ -193,9 +188,10 @@ flatMap(new Func1<List<String>, Observable<String>>() {
 >           }
 >       });
 >   }
->```
-打印结果：
-flatMap:: flatMap:老王来了
+>```    
+
+>打印结果：  
+flatMap:: flatMap:老王来了  
 
 ###**map 操作符**
 对Observable发射的每一项数据应用一个函数，执行变换操作
@@ -220,10 +216,11 @@ flatMap:: flatMap:老王来了
         return name.toString();
     }
 >```
-打印结果：
-map:: map:老张
-map:: map:**
-map:: map:老李
+
+>打印结果：  
+map:: map:老张  
+map:: map:**  
+map:: map:老李  
 
 >map的fun1参数和flagMap的参数意思都一样，这里是吧StringBuffer转换成String
 
@@ -241,13 +238,13 @@ map:: map:老李
                     }
                 });
     }
->```
->打印结果：
-buffer:: buffer:[2000, 3000]
-buffer:: buffer:[4000, 5]
-buffer:: buffer:[8, 9]
-buffer:: buffer:[10, 111]
-buffer:: buffer:[2]
+>```  
+>打印结果：  
+buffer:: buffer:[2000, 3000]  
+buffer:: buffer:[4000, 5]  
+buffer:: buffer:[8, 9]  
+buffer:: buffer:[10, 111]  
+buffer:: buffer:[2]  
 
 >可以看到 buffer对发射的数据做了一个缓存，然后以集合的方式发射出来,每2个一组
 
@@ -272,10 +269,10 @@ Filter操作符使用你指定的一个谓词函数测试数据项，只有通�
                 })
                 .subscribe(s->Log.d("filter:", "filter:" + s));
 >```
-打印结果:
-filter:: filter:老张
-filter:: filter:老李
-filter:: filter:小黄
+打印结果:  
+filter:: filter:老张  
+filter:: filter:老李  
+filter:: filter:小黄  
 
 >可以看到名字中含有老王的都被过滤掉了
 ###distinct操作符
@@ -286,9 +283,9 @@ filter:: filter:小黄
                 .distinct()
                 .subscribe(s -> Log.d("distinct:", "distinct:" + s));
 >```
-打印结果:
-distinct:: distinct:老王
-distinct:: distinct:老张
+打印结果:  
+distinct:: distinct:老王  
+distinct:: distinct:老张  
 
 >3个老王只打印了一个，实现了去重操作
 
@@ -314,9 +311,9 @@ distinct:: distinct:老张
  
 >    }
 >```
->打印结果 
-distinct:: distinct User:老王
-distinct:: distinct User:老张
+>打印结果   
+distinct:: distinct User:老王   
+distinct:: distinct User:老张  
 
 >成功过滤，还是通过`Func1<User,String>` 将user对象转换成String返回 然后去比较
 注意：我们这里将String当作用户类的唯一标识符
@@ -332,7 +329,7 @@ distinct:: distinct User:老张
                 .subscribe(sum->Log.d("scan:","sum(1-100):"+sum));
     }
 ```
-打印结果：
+打印结果：  
 >scan:: sum(1-100):5050
 
 这样是不是爽多了，last操作符 会只取最后一次的结果
@@ -346,8 +343,8 @@ distinct:: distinct User:老张
                 .subscribe(sum->Log.d("scan:","sum(1-100):"+sum));
     }
 ```
-打印结果:
->scan:: sum(1-100):100
+打印结果:  
+>scan:: sum(1-100):100  
 >>因为在scan看来，上面只发射了一次数据，所以不会走call方法
 
 
@@ -359,10 +356,10 @@ distinct:: distinct User:老张
                 .takeLast(2)
                 .subscribe(i->Log.d("scan:","takeLast:"+i));
 ```
-打印结果:
->scan:: takeLast:3000
-scan:: takeLast:4000
-takeLast(n) 会取最后发射的n个数据
+打印结果:  
+>scan:: takeLast:3000  
+scan:: takeLast:4000    
+takeLast(n) 会取最后发射的n个数据  
 
 ###**take 操作符**
 take(n) 是取发射数据的前n个 (相对的是skip(n)操作符 跳过发射数据的前n个)
@@ -372,9 +369,9 @@ take(n) 是取发射数据的前n个 (相对的是skip(n)操作符 跳过发射�
                 .take(2)
                 .subscribe(i->Log.d("scan:","take:"+i));
 ```
-打印结果:
->scan:: take:2000
-scan:: take:3000
+打印结果:  
+>scan:: take:2000  
+scan:: take:3000  
 
 ###**elementAt 操作符**
 ElementAt操作符获取原始Observable发射的数据序列指定索引位置的数据项，然后当做自己的唯一数据发射
@@ -383,9 +380,9 @@ ElementAt操作符获取原始Observable发射的数据序列指定索引位置�
         Observable.just("老王","老张","老李","小黄")
                 .elementAt(2)
                 .subscribe(s->Log.d("elementAt:", "elementAt:" + s));
->```
-打印结果：
-elementAt:: elementAt:老李
+>``` 
+打印结果：  
+elementAt:: elementAt:老李  
 
 >打印下标为2的老李
 
@@ -399,9 +396,9 @@ RxJava还实现了elementAtOrDefault操作符。与elementAt的区别是，如�
                 .first()
                 .subscribe(s->Log.d("first:", "first:" + s));
 >```
-打印结果：
+打印结果：  
 first:: first:1001
-只打印第一项，
+只打印第一项  
 
 在来个栗子： 满足某个条件的第一项 
 >```java
@@ -415,10 +412,10 @@ Observable.just("1001","1008","1009","1008")
                 })
                 .subscribe(s->Log.d("first:", "first:" + s));
 >```
-打印结果：
-first:: id:1001
-first:: id:1008
-first:: first:1008
+打印结果：  
+first:: id:1001  
+first:: id:1008  
+first:: first:1008  
 
 >可以看到一旦找到id为1008的就不在发射数据了
 
@@ -428,37 +425,37 @@ first:: first:1008
 >比如 我要将一组数据缓存到本地数据库，现在我只想在完成的时候通知我就行了 
 >```java
 >     Observable.create(new Observable.OnSubscribe<Object>() {
-            @Override
+>            @Override
 >            public void call(Subscriber<? super Object> subscriber) {
-                for(int i=0; i<3; i++){
-                    Log.d("ignoreElements:","CallonNext,保存成功"+i);
-                    subscriber.onNext("CallonNext,保存成功");
-                }
-                subscriber.onCompleted();
-            }
-        })
-                .ignoreElements()
-                .subscribe(new Subscriber<Object>() {
+>                for(int i=0; i<3; i++){
+>                    Log.d("ignoreElements:","CallonNext,保存成功"+i);
+>                    subscriber.onNext("CallonNext,保存成功");
+>                }
+>                subscriber.onCompleted();
+>            }
+>        })
+>                .ignoreElements()
+>                .subscribe(new Subscriber<Object>() {
 >                    @Override
 >                    public void onCompleted() {
-                        Log.d("ignoreElements:", "onCompleted");
-                    }
-
+>                        Log.d("ignoreElements:", "onCompleted");
+>                    }
+>
 >                    @Override
 >                    public void onError(Throwable e) {
-                        Log.d("ignoreElements:", "onError");
-                    }
-
+>                        Log.d("ignoreElements:", "onError");
+>                    }
+>
 >                    @Override
 >                    public void onNext(Object o) {
-                        Log.d("ignoreElements:", "onNext:"+o);
-                    }
-                });
+>                        Log.d("ignoreElements:", "onNext:"+o);
+>                    }
+>                });
 >```
->打印结果:
-ignoreElements:: CallonNext,保存成功0
-ignoreElements:: CallonNext,保存成功1
-ignoreElements:: CallonNext,保存成功2
+>打印结果:  
+ignoreElements:: CallonNext,保存成功0   
+ignoreElements:: CallonNext,保存成功1  
+ignoreElements:: CallonNext,保存成功2  
 ignoreElements:: onCompleted
 
 >可以看到在call里调用了3次onNext 结果却一次也没有被调用，只有完成时调用了onCompleted,这就是ignoreElements操作符的作用
@@ -485,12 +482,12 @@ ignoreElements:: onCompleted
 >            }
 >        });
 >```
-然后我们输入 jack
-打印结果:
-debounce:: edittext:j
-debounce:: edittext:ja
-debounce:: edittext:jac
-debounce:: edittext:jack
+然后我们输入 jack  
+打印结果:  
+debounce:: edittext:j  
+debounce:: edittext:ja  
+debounce:: edittext:jac  
+debounce:: edittext:jack  
 
 >发现数据发射频率太快，因为我实际要的是jack 然后这样每次都会去做筛选，其实前3次的筛选完全没必要，
 
@@ -500,7 +497,7 @@ debounce:: edittext:jack
                 .debounce(1000,TimeUnit.MILLISECONDS)
                 .subscribe(s->Log.d("debounce:", "onNext:"+s));
 ```
->打印结果：
+>打印结果：  
 >debounce:: onNext:jack
 
 >这个我们通过debounce操作符设置每隔1000毫秒发射一次数据，当用户在1000毫秒内输入玩jack就会只发>射一次， 想对于传统写法 不仅优化了性能，而且代码也十分的简洁
@@ -536,26 +533,26 @@ debounce:: edittext:jack
 >                    }
 >                });
 >```
-打印结果：
-merge:: onNext:1
-merge:: onNext:2
-merge:: onNext:3
-merge:: onNext:8
-merge:: onNext:9
-merge:: onNext:10
-merge:: onCompleted
+打印结果：  
+merge:: onNext:1  
+merge:: onNext:2  
+merge:: onNext:3  
+merge:: onNext:8  
+merge:: onNext:9  
+merge:: onNext:10  
+merge:: onCompleted  
 
 ###**catch 操作符**
 Catch操作符拦截原始Observable的onError通知，将它替换为其它的数据项或数据序列，让产生的Observable能够正常终止或者根本不终止。
 
 >RxJava将Catch实现为三个不同的操作符：
 
->1. onErrorReturn
+>1. onErrorReturn  
 >让Observable遇到错误时发射一个特殊的项并且正常终止。
 >
->2. onErrorResumeNext
+>2. onErrorResumeNext  
 >让Observable在遇到错误时开始发射第二个Observable的数据序列。
->3. onExceptionResumeNext
+>3. onExceptionResumeNext  
 >让Observable在遇到错误时继续发射后面的数据项。
 
 我们首先来看下第一个
@@ -598,9 +595,9 @@ Observable.create(new Observable.OnSubscribe<String>() {
                     }
                 });
 >```
-打印结果为:
-rxCatch:: onNext：偶数
-rxCatch:: onCompleted
+打印结果为:  
+rxCatch:: onNext：偶数  
+rxCatch:: onCompleted  
 
 >可以看到 使用 onErrorReturn对onError类型进行了转换，所以最后的subscribe里没有走onError方法，而是走了onNext方法，但是由于才发射数据时走了onError方法，所以数据序列的发射被中止了
 
@@ -643,13 +640,13 @@ Observable.create(new Observable.OnSubscribe<String>() {
                     }
                 });
 >```
-打印结果:
-rxCatch:: onNext：i:0
-rxCatch:: onNext：奇数
-rxCatch:: onNext：100
-rxCatch:: onNext：200
-rxCatch:: onNext：300
-rxCatch:: onCompleted
+打印结果:  
+rxCatch:: onNext：i:0  
+rxCatch:: onNext：奇数  
+rxCatch:: onNext：100  
+rxCatch:: onNext：200  
+rxCatch:: onNext：300  
+rxCatch:: onCompleted  
 
 >可以看到当发射第一个数据序列时，遇到onError后，就进到OnErrorResumeNext任务里 执行第二个数据序列的发射
 
@@ -688,12 +685,12 @@ rxCatch:: onCompleted
                 });
 >```
 
->打印结果：
-rxCatch:: onNext：i:0
-rxCatch:: onNext：111
-rxCatch:: onNext：123
-rxCatch:: onNext：666
-rxCatch:: onCompleted
+>打印结果：  
+rxCatch:: onNext：i:0  
+rxCatch:: onNext：111  
+rxCatch:: onNext：123  
+rxCatch:: onNext：666  
+rxCatch:: onCompleted  
 
 >可以看到 当i为奇数时，我们抛了个异常，然后就走onExceptionResumeNext 去继续发射第二个数据序列
 
@@ -737,11 +734,11 @@ rxCatch:: onCompleted
                 });
     }
 >```
-打印结果:
-retry:: call:第1次请求
-retry:: call:第2次请求
-retry:: onNext:请求成功
-retry:: onCompleted
+打印结果:  
+retry:: call:第1次请求  
+retry:: call:第2次请求   
+retry:: onNext:请求成功  
+retry:: onCompleted  
 
 >可以看到一共进行了两次请求，第一次请求失败的没有走onError方法
 
